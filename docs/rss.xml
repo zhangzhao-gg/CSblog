@@ -1,5 +1,22 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>张钊的代码与旷野</title><link>https://zhangzhao-gg.github.io/CSblog</link><description>技术·创业·运动·艺术·阅读·成长笔记</description><copyright>张钊的代码与旷野</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://zz-1306813397.cos.ap-guangzhou.myqcloud.com/%E5%BC%A0%E9%92%8A.jpg</url><title>avatar</title><link>https://zhangzhao-gg.github.io/CSblog</link></image><lastBuildDate>Sun, 19 Oct 2025 12:30:35 +0000</lastBuildDate><managingEditor>张钊的代码与旷野</managingEditor><ttl>60</ttl><webMaster>张钊的代码与旷野</webMaster><item><title>产品直觉学习1：拆解一个互联网产品-独响</title><link>https://zhangzhao-gg.github.io/CSblog/post/chan-pin-zhi-jue-xue-xi-1%EF%BC%9A-chai-jie-yi-ge-hu-lian-wang-chan-pin---du-xiang.html</link><description>目标用户与痛点
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>张钊的代码与旷野</title><link>https://zhangzhao-gg.github.io/CSblog</link><description>技术·创业·运动·艺术·阅读·成长笔记</description><copyright>张钊的代码与旷野</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://zz-1306813397.cos.ap-guangzhou.myqcloud.com/%E5%BC%A0%E9%92%8A.jpg</url><title>avatar</title><link>https://zhangzhao-gg.github.io/CSblog</link></image><lastBuildDate>Sun, 19 Oct 2025 12:54:31 +0000</lastBuildDate><managingEditor>张钊的代码与旷野</managingEditor><ttl>60</ttl><webMaster>张钊的代码与旷野</webMaster><item><title>10.20-11.1计划</title><link>https://zhangzhao-gg.github.io/CSblog/post/10.20-11.1-ji-hua.html</link><description>Offer透透
+
+**产品定位：找到定位，看见真实**
+
+痛点
+为大神提供「秀肌肉」的舞台
+为普通人提供「找位置」的参照
+为落后同学提供「不孤单」的安慰
+
+目标群体
+全部秋招选手
+
+场景
+对于秋招大神想知道自己多么领先，对于秋招0offer选手想知道有多少同学跟自己同病相怜
+
+功能
+对于前1000个用户
+进入首页，匿名填写院校层次/offer数量/薪资区间/城市情况等信息。</description><guid isPermaLink="true">https://zhangzhao-gg.github.io/CSblog/post/10.20-11.1-ji-hua.html</guid><pubDate>Sun, 19 Oct 2025 12:53:55 +0000</pubDate></item><item><title>产品直觉学习1：拆解一个互联网产品-独响</title><link>https://zhangzhao-gg.github.io/CSblog/post/chan-pin-zhi-jue-xue-xi-1%EF%BC%9A-chai-jie-yi-ge-hu-lian-wang-chan-pin---du-xiang.html</link><description>目标用户与痛点
 
 目标用户：年轻人14-30左右的年轻人，女性偏多，有社交需求，但是惧怕社交压力。</description><guid isPermaLink="true">https://zhangzhao-gg.github.io/CSblog/post/chan-pin-zhi-jue-xue-xi-1%EF%BC%9A-chai-jie-yi-ge-hu-lian-wang-chan-pin---du-xiang.html</guid><pubDate>Sun, 19 Oct 2025 12:30:03 +0000</pubDate></item><item><title>复盘23年那个萌芽的创业项目</title><link>https://zhangzhao-gg.github.io/CSblog/post/fu-pan-23-nian-na-ge-meng-ya-de-chuang-ye-xiang-mu.html</link><description>23年6月是我本科毕业那一年。</description><guid isPermaLink="true">https://zhangzhao-gg.github.io/CSblog/post/fu-pan-23-nian-na-ge-meng-ya-de-chuang-ye-xiang-mu.html</guid><pubDate>Sun, 12 Oct 2025 14:19:38 +0000</pubDate></item><item><title>面对线上项目崩溃的解决办法-顶峰数藏</title><link>https://zhangzhao-gg.github.io/CSblog/post/mian-dui-xian-shang-xiang-mu-beng-kui-de-jie-jue-ban-fa---ding-feng-shu-cang.html</link><description>9.16号，是顶峰数藏平台上线的第一天。</description><guid isPermaLink="true">https://zhangzhao-gg.github.io/CSblog/post/mian-dui-xian-shang-xiang-mu-beng-kui-de-jie-jue-ban-fa---ding-feng-shu-cang.html</guid><pubDate>Mon, 15 Sep 2025 09:56:19 +0000</pubDate></item><item><title>技术可以让你走的很快，但感恩才能让你走的更远</title><link>https://zhangzhao-gg.github.io/CSblog/post/ji-shu-ke-yi-rang-ni-zou-de-hen-kuai-%EF%BC%8C-dan-gan-en-cai-neng-rang-ni-zou-de-geng-yuan.html</link><description>2023年五月份，当时我正埋头搞技术和毕业设计呢，我哥们儿华顶峰突然找我，说想自己办个数藏平台，市场运营人员都搞定了，但是技术这边缺个能搞定前后端开发的人。</description><guid isPermaLink="true">https://zhangzhao-gg.github.io/CSblog/post/ji-shu-ke-yi-rang-ni-zou-de-hen-kuai-%EF%BC%8C-dan-gan-en-cai-neng-rang-ni-zou-de-geng-yuan.html</guid><pubDate>Thu, 11 Sep 2025 07:11:23 +0000</pubDate></item><item><title>实习随笔：语音检测服务重构的挑战</title><link>https://zhangzhao-gg.github.io/CSblog/post/shi-xi-sui-bi-%EF%BC%9A-yu-yin-jian-ce-fu-wu-zhong-gou-de-tiao-zhan.html</link><description># 从创业到工业界：高并发语音系统的优化
 
