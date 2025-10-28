@@ -94,7 +94,9 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 我们选择<a href="https://huggingface.co/Qwen/Qwen3-30B-A3B-Instruct-2507-FP8" rel="nofollow">这个Qwen3-30B的量化模型</a><br>
 下载指令为：<br>
 <code class="notranslate">pip install -U "huggingface[cli]</code><br>
-<code class="notranslate">huggingface-cli download --resume-download gpt2 --local-dir gpt2</code><br>
+<code class="notranslate">huggingface-cli download --resume-download Qwen/Qwen3-30B-A3B-Instruct-2507-FP8 --local-dir qwen3-30b-fp8</code><br>
+<code class="notranslate">huggingface-cli download --resume-download QuantTrio/Qwen3-Coder-30B-A3B-Instruct-GPTQ-Int8 --local-dir qwen3-30b-int8</code><br>
+<code class="notranslate">huggingface-cli download --resume-download Qwen/Qwen3-30B-A3B-GPTQ-Int4 --local-dir qwen3-30b-int4</code><br>
 上面的下载指令改成你自己的模型和要下载到的文件夹下</p>
 <p>下载可能中断，因为下载源在国外，我们进行换源<br>
 <code class="notranslate">export HF_ENDPOINT=https://hf-mirror.com</code><br>
