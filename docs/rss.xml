@@ -1,5 +1,15 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>张钊的代码与旷野</title><link>https://zhangzhao-gg.github.io/CSblog</link><description>技术·创业·运动·艺术·阅读·成长笔记</description><copyright>张钊的代码与旷野</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://zz-1306813397.cos.ap-guangzhou.myqcloud.com/%E5%BC%A0%E9%92%8A.jpg</url><title>avatar</title><link>https://zhangzhao-gg.github.io/CSblog</link></image><lastBuildDate>Tue, 28 Oct 2025 08:48:37 +0000</lastBuildDate><managingEditor>张钊的代码与旷野</managingEditor><ttl>60</ttl><webMaster>张钊的代码与旷野</webMaster><item><title>探索qwen系列模型性能与效果</title><link>https://zhangzhao-gg.github.io/CSblog/post/tan-suo-qwen-xi-lie-mo-xing-xing-neng-yu-xiao-guo.html</link><description>硬件条件：AutoDL 平台的VGPU 48G
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>张钊的代码与旷野</title><link>https://zhangzhao-gg.github.io/CSblog</link><description>技术·创业·运动·艺术·阅读·成长笔记</description><copyright>张钊的代码与旷野</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://zz-1306813397.cos.ap-guangzhou.myqcloud.com/%E5%BC%A0%E9%92%8A.jpg</url><title>avatar</title><link>https://zhangzhao-gg.github.io/CSblog</link></image><lastBuildDate>Wed, 29 Oct 2025 02:34:54 +0000</lastBuildDate><managingEditor>张钊的代码与旷野</managingEditor><ttl>60</ttl><webMaster>张钊的代码与旷野</webMaster><item><title>Qwen-Omni 需求分析与评测</title><link>https://zhangzhao-gg.github.io/CSblog/post/Qwen-Omni%20-xu-qiu-fen-xi-yu-ping-ce.html</link><description>Qwen-Omni模型当前功能是能够支持多模态输入输出
+
+调研结果，数据来源于论文，魔塔社区反馈，官方写的介绍信息，huggingFace的demo测试
+
+开源的三个模型：
+Qwen/Qwen3-Omni-30B-A3B-Captioner
+Qwen/Qwen3-Omni-30B-A3B-Instruct
+Qwen/Qwen3-Omni-30B-A3B-Thinking
+
+**音频相关能力：**
+其中Qwen3-Omni-30B-A3B-Instruct模型根据魔塔介绍支持：实时音频/视频交互，低延迟流媒体，具有自然的轮流发言和即时文本或语音响应。</description><guid isPermaLink="true">https://zhangzhao-gg.github.io/CSblog/post/Qwen-Omni%20-xu-qiu-fen-xi-yu-ping-ce.html</guid><pubDate>Wed, 29 Oct 2025 02:34:26 +0000</pubDate></item><item><title>探索qwen系列模型性能与效果</title><link>https://zhangzhao-gg.github.io/CSblog/post/tan-suo-qwen-xi-lie-mo-xing-xing-neng-yu-xiao-guo.html</link><description>硬件条件：AutoDL 平台的VGPU 48G
 
 1. 1Qwen/Qwen3-30B-A3B-Instruct-2507-FP8
 显存占用 45G，在45G基础上的上下文为32k
