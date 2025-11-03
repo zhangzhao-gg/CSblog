@@ -286,6 +286,93 @@ Processed prompts: 100%|██████████████████�
 Of course! Based on the image you provided, here is a detailed description of what is happening:
 
 A person is using a stylus to draw a cartoon-style acoustic guitar on a tablet. The guitar is depicted with a light brown body, a black neck and headstock, and black strings. The person's left hand is holding the tablet steady on a wooden table, while their right hand actively uses the stylus to draw.
+</code></pre>
+<p>成功后，我们把他运行成为一个服务，确保你有48G显存，不然就把max-model-len改小一点。我的模型文件夹叫做qwen3-omni-30b-int8，你看看你的是不是也是这个名字，是的话就直接抄我的。<br>
+<code class="notranslate">vllm serve qwen3-omni-30b-int8 --max-model-len 32768 --port 6006</code><br>
+运行成功</p>
+<pre class="notranslate"><code class="notranslate">(qwen) root@autodl-container-0a4d4f962f-c0ee9df0:~/autodl-tmp# vllm serve qwen3-omni-30b-int8 --max-model-len 32768 --port 6006
+INFO 11-03 16:23:52 [__init__.py:244] Automatically detected platform cuda.
+INFO 11-03 16:23:55 [api_server.py:1395] vLLM API server version 0.9.3.dev6+gca66cbff0
+INFO 11-03 16:23:55 [cli_args.py:325] non-default args: {'port': 6006, 'model': 'qwen3-omni-30b-int8', 'max_model_len': 32768}
+Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'interleaved', 'mrope_section', 'mrope_interleaved'}
+Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'interleaved', 'mrope_section'}
+INFO 11-03 16:24:00 [config.py:841] This model supports multiple tasks: {'generate', 'classify', 'embed', 'reward'}. Defaulting to 'generate'.
+`torch_dtype` is deprecated! Use `dtype` instead!
+INFO 11-03 16:24:00 [config.py:1472] Using max model len 32768
+INFO 11-03 16:24:00 [config.py:2285] Chunked prefill is enabled with max_num_batched_tokens=2048.
+INFO 11-03 16:24:04 [__init__.py:244] Automatically detected platform cuda.
+INFO 11-03 16:24:06 [core.py:526] Waiting for init message from front-end.
+INFO 11-03 16:24:06 [core.py:69] Initializing a V1 LLM engine (v0.9.3.dev6+gca66cbff0) with config: model='qwen3-omni-30b-int8', speculative_config=None, tokenizer='qwen3-omni-30b-int8', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, override_neuron_config={}, tokenizer_revision=None, trust_remote_code=False, dtype=torch.bfloat16, max_seq_len=32768, download_dir=None, load_format=auto, tensor_parallel_size=1, pipeline_parallel_size=1, disable_custom_all_reduce=False, quantization=compressed-tensors, enforce_eager=False, kv_cache_dtype=auto,  device_config=cuda, decoding_config=DecodingConfig(backend='auto', disable_fallback=False, disable_any_whitespace=False, disable_additional_properties=False, reasoning_backend=''), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None), seed=0, served_model_name=qwen3-omni-30b-int8, num_scheduler_steps=1, multi_step_stream_outputs=True, enable_prefix_caching=True, chunked_prefill_enabled=True, use_async_output_proc=True, pooler_config=None, compilation_config={"level":3,"debug_dump_path":"","cache_dir":"","backend":"","custom_ops":[],"splitting_ops":["vllm.unified_attention","vllm.unified_attention_with_output"],"use_inductor":true,"compile_sizes":[],"inductor_compile_config":{"enable_auto_functionalized_v2":false},"inductor_passes":{},"use_cudagraph":true,"cudagraph_num_of_warmups":1,"cudagraph_capture_sizes":[512,504,496,488,480,472,464,456,448,440,432,424,416,408,400,392,384,376,368,360,352,344,336,328,320,312,304,296,288,280,272,264,256,248,240,232,224,216,208,200,192,184,176,168,160,152,144,136,128,120,112,104,96,88,80,72,64,56,48,40,32,24,16,8,4,2,1],"cudagraph_copy_inputs":false,"full_cuda_graph":false,"max_capture_size":512,"local_cache_dir":null}
+INFO 11-03 16:24:06 [parallel_state.py:1076] rank 0 in world size 1 is assigned as DP rank 0, PP rank 0, TP rank 0, EP rank 0
+The image processor of type `Qwen2VLImageProcessor` is now loaded as a fast processor by default, even if the model checkpoint was saved with a slow processor. This is a breaking change and may produce slightly different outputs. To continue using the slow processor, instantiate this class with `use_fast=False`. Note that this behavior will be extended to all models in a future release.
+WARNING 11-03 16:24:09 [topk_topp_sampler.py:59] FlashInfer is not available. Falling back to the PyTorch-native implementation of top-p &amp; top-k sampling. For the best performance, please install FlashInfer.
+INFO 11-03 16:24:09 [gpu_model_runner.py:1784] Starting to load model qwen3-omni-30b-int8...
+INFO 11-03 16:24:09 [gpu_model_runner.py:1789] Loading model from scratch...
+You are attempting to use Flash Attention 2 without specifying a torch dtype. This might lead to unexpected behaviour
+INFO 11-03 16:24:09 [compressed_tensors_wNa16.py:95] Using MarlinLinearKernel for CompressedTensorsWNA16
+INFO 11-03 16:24:09 [cuda.py:284] Using Flash Attention backend on V1 engine.
+WARNING 11-03 16:24:09 [config.py:440] MoE DP setup unable to determine quantization scheme or unsupported quantization type. This model will not run with DP enabled.
+INFO 11-03 16:24:09 [compressed_tensors_moe.py:82] Using CompressedTensorsWNA16MarlinMoEMethod
+Loading safetensors checkpoint shards:   0% Completed | 0/9 [00:00&lt;?, ?it/s]
+Loading safetensors checkpoint shards:  11% Completed | 1/9 [00:00&lt;00:03,  2.20it/s]
+Loading safetensors checkpoint shards:  22% Completed | 2/9 [00:03&lt;00:15,  2.21s/it]
+Loading safetensors checkpoint shards:  33% Completed | 3/9 [00:07&lt;00:16,  2.83s/it]
+Loading safetensors checkpoint shards:  44% Completed | 4/9 [00:11&lt;00:15,  3.11s/it]
+Loading safetensors checkpoint shards:  56% Completed | 5/9 [00:14&lt;00:13,  3.28s/it]
+Loading safetensors checkpoint shards:  67% Completed | 6/9 [00:17&lt;00:09,  3.28s/it]
+Loading safetensors checkpoint shards:  78% Completed | 7/9 [00:21&lt;00:06,  3.35s/it]
+Loading safetensors checkpoint shards:  89% Completed | 8/9 [00:21&lt;00:02,  2.32s/it]
+Loading safetensors checkpoint shards: 100% Completed | 9/9 [00:23&lt;00:00,  2.17s/it]
+Loading safetensors checkpoint shards: 100% Completed | 9/9 [00:23&lt;00:00,  2.59s/it]
+
+INFO 11-03 16:24:33 [default_loader.py:272] Loading weights took 23.37 seconds
+INFO 11-03 16:24:34 [gpu_model_runner.py:1815] Model loading took 33.0604 GiB and 24.789878 seconds
+INFO 11-03 16:24:34 [gpu_model_runner.py:2252] Encoder cache will be initialized with a budget of 12544 tokens, and profiled with 1 image items of the maximum feature size.
+INFO 11-03 16:24:48 [backends.py:508] Using cache directory: /root/.cache/vllm/torch_compile_cache/731422acde/rank_0_0/backbone for vLLM's torch.compile
+INFO 11-03 16:24:48 [backends.py:519] Dynamo bytecode transform time: 10.14 s
+INFO 11-03 16:24:53 [backends.py:181] Cache the graph of shape None for later use
+INFO 11-03 16:25:56 [backends.py:193] Compiling a graph for general shape takes 67.46 s
+WARNING 11-03 16:26:20 [fused_moe.py:690] Using default MoE config. Performance might be sub-optimal! Config file not found at /root/vllm/vllm/model_executor/layers/fused_moe/configs/E=128,N=8192,device_name=NVIDIA_GeForce_RTX_4090.json
+INFO 11-03 16:26:20 [marlin_utils.py:346] You are running Marlin kernel with bf16 on GPUs before SM90. You can consider change to fp16 to achieve better performance if possible.
+INFO 11-03 16:26:35 [monitor.py:34] torch.compile takes 77.60 s in total
+INFO 11-03 16:26:37 [gpu_worker.py:232] Available KV cache memory: 7.34 GiB
+INFO 11-03 16:26:38 [kv_cache_utils.py:716] GPU KV cache size: 80,192 tokens
+INFO 11-03 16:26:38 [kv_cache_utils.py:720] Maximum concurrency for 32,768 tokens per request: 2.45x
+Capturing CUDA graph shapes: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 67/67 [01:02&lt;00:00,  1.07it/s]
+INFO 11-03 16:27:40 [gpu_model_runner.py:2340] Graph capturing finished in 63 secs, took 1.03 GiB
+INFO 11-03 16:27:40 [core.py:172] init engine (profile, create kv cache, warmup model) took 186.12 seconds
+INFO 11-03 16:27:40 [loggers.py:137] Engine 000: vllm cache_config_info with initialization after num_gpu_blocks is: 5012
+INFO 11-03 16:27:41 [api_server.py:1457] Starting vLLM API server 0 on http://0.0.0.0:6006
+INFO 11-03 16:27:41 [launcher.py:29] Available routes are:
+INFO 11-03 16:27:41 [launcher.py:37] Route: /openapi.json, Methods: GET, HEAD
+INFO 11-03 16:27:41 [launcher.py:37] Route: /docs, Methods: GET, HEAD
+INFO 11-03 16:27:41 [launcher.py:37] Route: /docs/oauth2-redirect, Methods: GET, HEAD
+INFO 11-03 16:27:41 [launcher.py:37] Route: /redoc, Methods: GET, HEAD
+INFO 11-03 16:27:41 [launcher.py:37] Route: /health, Methods: GET
+INFO 11-03 16:27:41 [launcher.py:37] Route: /load, Methods: GET
+INFO 11-03 16:27:41 [launcher.py:37] Route: /ping, Methods: POST
+INFO 11-03 16:27:41 [launcher.py:37] Route: /ping, Methods: GET
+INFO 11-03 16:27:41 [launcher.py:37] Route: /tokenize, Methods: POST
+INFO 11-03 16:27:41 [launcher.py:37] Route: /detokenize, Methods: POST
+INFO 11-03 16:27:41 [launcher.py:37] Route: /v1/models, Methods: GET
+INFO 11-03 16:27:41 [launcher.py:37] Route: /version, Methods: GET
+INFO 11-03 16:27:41 [launcher.py:37] Route: /v1/chat/completions, Methods: POST
+INFO 11-03 16:27:41 [launcher.py:37] Route: /v1/completions, Methods: POST
+INFO 11-03 16:27:41 [launcher.py:37] Route: /v1/embeddings, Methods: POST
+INFO 11-03 16:27:41 [launcher.py:37] Route: /pooling, Methods: POST
+INFO 11-03 16:27:41 [launcher.py:37] Route: /classify, Methods: POST
+INFO 11-03 16:27:41 [launcher.py:37] Route: /score, Methods: POST
+INFO 11-03 16:27:41 [launcher.py:37] Route: /v1/score, Methods: POST
+INFO 11-03 16:27:41 [launcher.py:37] Route: /v1/audio/transcriptions, Methods: POST
+INFO 11-03 16:27:41 [launcher.py:37] Route: /v1/audio/translations, Methods: POST
+INFO 11-03 16:27:41 [launcher.py:37] Route: /rerank, Methods: POST
+INFO 11-03 16:27:41 [launcher.py:37] Route: /v1/rerank, Methods: POST
+INFO 11-03 16:27:41 [launcher.py:37] Route: /v2/rerank, Methods: POST
+INFO 11-03 16:27:41 [launcher.py:37] Route: /invocations, Methods: POST
+INFO 11-03 16:27:41 [launcher.py:37] Route: /metrics, Methods: GET
+INFO:     Started server process [24378]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
 </code></pre></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 
