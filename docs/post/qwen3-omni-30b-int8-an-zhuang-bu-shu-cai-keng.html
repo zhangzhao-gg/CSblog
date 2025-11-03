@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html data-color-mode="light" data-dark-theme="dark" data-light-theme="light" lang="zh-CN">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
+    
+    <link rel="icon" href="https://zz-1306813397.cos.ap-guangzhou.myqcloud.com/%E5%BC%A0%E9%92%8A.jpg"><script>
+        let theme = localStorage.getItem("meek_theme") || "light";
+        document.documentElement.setAttribute("data-color-mode", theme);
+    </script>
+<meta name="description" content="魔塔社区的链接在这里
+https://modelscope.cn/models/Qwen/Qwen3-Omni-30B-A3B-Instruct/summary
+全程科学上网，且重新开一个纯净的新环境，在新环境里配环境。">
+<meta property="og:title" content="qwen3-omni-30b-int8安装部署踩坑">
+<meta property="og:description" content="魔塔社区的链接在这里
+https://modelscope.cn/models/Qwen/Qwen3-Omni-30B-A3B-Instruct/summary
+全程科学上网，且重新开一个纯净的新环境，在新环境里配环境。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://zhangzhao-gg.github.io/CSblog/post/qwen3-omni-30b-int8-an-zhuang-bu-shu-cai-keng.html">
+<meta property="og:image" content="https://zz-1306813397.cos.ap-guangzhou.myqcloud.com/%E5%BC%A0%E9%92%8A.jpg">
+<title>qwen3-omni-30b-int8安装部署踩坑</title>
+
+
+
+</head>
+<style>
+body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
+#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
+#footer {margin-top:64px; text-align: center;font-size: small;}
+
+</style>
+
+<style>
+.postTitle{margin: auto 0;font-size:40px;font-weight:bold;}
+.title-right{display:flex;margin:auto 0 0 auto;}
+.title-right .circle{padding: 14px 16px;margin-right:8px;}
+#postBody{border-bottom: 1px solid var(--color-border-default);padding-bottom:36px;}
+#postBody hr{height:2px;}
+#cmButton{height:48px;margin-top:48px;}
+#comments{margin-top:64px;}
+.g-emoji{font-size:24px;}
+@media (max-width: 600px) {
+    body {padding: 8px;}
+    .postTitle{font-size:24px;}
+}
+.copy-feedback {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 50px;
+    color: var(--color-fg-on-emphasis);
+    background-color: var(--color-fg-muted);
+    border-radius: 3px;
+    padding: 5px 8px;
+    font-size: 12px;
+}
+</style>
+
+
+
+
+<body>
+    <div id="header">
+<h1 class="postTitle">qwen3-omni-30b-int8安装部署踩坑</h1>
+<div class="title-right">
+    <a href="https://zhangzhao-gg.github.io/CSblog" id="buttonHome" class="btn btn-invisible circle" title="首页">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathHome" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+    <a href="https://github.com/zhangzhao-gg/CSblog/issues/14" target="_blank" class="btn btn-invisible circle" title="Issue">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathIssue" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+
+    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题">
+        <svg class="octicon" width="16" height="16" >
+            <path id="themeSwitch" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+
+</div>
+</div>
+    <div id="content">
+<div class="markdown-body" id="postBody"><p>魔塔社区的链接在这里<br>
+<a href="https://modelscope.cn/models/Qwen/Qwen3-Omni-30B-A3B-Instruct/summary" rel="nofollow">https://modelscope.cn/models/Qwen/Qwen3-Omni-30B-A3B-Instruct/summary</a><br>
+全程科学上网，且重新开一个纯净的新环境，在新环境里配环境。</p>
+<p>1安装transformers，需要源码下载<br>
+<code class="notranslate">pip install git+https://github.com/huggingface/transformers</code><br>
+2<code class="notranslate">pip install accelerate</code><br>
+3<code class="notranslate">pip install qwen-omni-utils -U</code><br>
+4<br>
+<code class="notranslate">pip install -U flash-attn --no-build-isolation</code><br>
+这一步就有问题，如果不开科学上网，他会卡在编译过程非常慢。<br>
+autoDL支持科学上网：</p>
+<pre class="notranslate"><code class="notranslate">source /etc/network_turbo
+python -m pip install ninja -i https://pypi.tuna.tsinghua.edu.cn/simple
+</code></pre>
+<p>很快编译完成啦<br>
+然后运行，报错</p>
+<pre class="notranslate"><code class="notranslate">(qwen) root@autodl-container-0a4d4f962f-c0ee9df0:~/autodl-tmp# python omni.py
+Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved', 'interleaved'}
+Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'interleaved'}
+Traceback (most recent call last):
+  File "/root/autodl-tmp/omni.py", line 9, in &lt;module&gt;
+    model = Qwen3OmniMoeForConditionalGeneration.from_pretrained(
+  File "/root/miniconda3/envs/qwen/lib/python3.10/site-packages/modelscope/utils/hf_util/patcher.py", line 285, in from_pretrained
+    module_obj = module_class.from_pretrained(
+  File "/root/miniconda3/envs/qwen/lib/python3.10/site-packages/transformers/modeling_utils.py", line 270, in _wrapper
+    return func(*args, **kwargs)
+  File "/root/miniconda3/envs/qwen/lib/python3.10/site-packages/transformers/modeling_utils.py", line 4451, in from_pretrained
+    model = cls(config, *model_args, **model_kwargs)
+  File "/root/miniconda3/envs/qwen/lib/python3.10/site-packages/transformers/models/qwen3_omni_moe/modeling_qwen3_omni_moe.py", line 3802, in __init__
+    super().__init__(config)
+  File "/root/miniconda3/envs/qwen/lib/python3.10/site-packages/transformers/modeling_utils.py", line 1826, in __init__
+    self.config._attn_implementation_internal = self._check_and_adjust_attn_implementation(
+  File "/root/miniconda3/envs/qwen/lib/python3.10/site-packages/transformers/modeling_utils.py", line 2413, in _check_and_adjust_attn_implementation
+    lazy_import_flash_attention(applicable_attn_implementation, force_import=True)
+  File "/root/miniconda3/envs/qwen/lib/python3.10/site-packages/transformers/modeling_flash_attention_utils.py", line 136, in lazy_import_flash_attention
+    _flash_fn, _flash_varlen_fn, _pad_fn, _unpad_fn = _lazy_imports(implementation)
+  File "/root/miniconda3/envs/qwen/lib/python3.10/site-packages/transformers/modeling_flash_attention_utils.py", line 83, in _lazy_imports
+    from flash_attn import flash_attn_func, flash_attn_varlen_func
+  File "/root/miniconda3/envs/qwen/lib/python3.10/site-packages/flash_attn/__init__.py", line 3, in &lt;module&gt;
+    from flash_attn.flash_attn_interface import (
+  File "/root/miniconda3/envs/qwen/lib/python3.10/site-packages/flash_attn/flash_attn_interface.py", line 15, in &lt;module&gt;
+    import flash_attn_2_cuda as flash_attn_gpu
+ImportError: /root/miniconda3/envs/qwen/lib/python3.10/site-packages/flash_attn_2_cuda.cpython-310-x86_64-linux-gnu.so: undefined symbol: _ZNK3c106SymInt6sym_neERKS0_
+</code></pre>
+<p>调查了一下，原因是因为pytorch版本和我的flash-attention不匹配。flash-attention也得回退老版本。<br>
+回退老版本：<br>
+<code class="notranslate">pip install torch==2.7.0 torchvision==0.22.0 torchaudio==2.7.0 --index-url https://download.pytorch.org/whl/cu128</code><br>
+不报上面的错了，但又有新错误了</p>
+<pre class="notranslate"><code class="notranslate">(qwen) root@autodl-container-0a4d4f962f-c0ee9df0:~/autodl-tmp# python omni.py
+Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved', 'interleaved'}
+Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'interleaved'}
+You are attempting to use Flash Attention 2 without specifying a torch dtype. This might lead to unexpected behaviour
+Traceback (most recent call last):
+  File "/root/autodl-tmp/omni.py", line 9, in &lt;module&gt;
+    model = Qwen3OmniMoeForConditionalGeneration.from_pretrained(
+  File "/root/miniconda3/envs/qwen/lib/python3.10/site-packages/modelscope/utils/hf_util/patcher.py", line 285, in from_pretrained
+    module_obj = module_class.from_pretrained(
+  File "/root/miniconda3/envs/qwen/lib/python3.10/site-packages/transformers/modeling_utils.py", line 270, in _wrapper
+    return func(*args, **kwargs)
+  File "/root/miniconda3/envs/qwen/lib/python3.10/site-packages/transformers/modeling_utils.py", line 4451, in from_pretrained
+    model = cls(config, *model_args, **model_kwargs)
+  File "/root/miniconda3/envs/qwen/lib/python3.10/site-packages/transformers/models/qwen3_omni_moe/modeling_qwen3_omni_moe.py", line 3807, in __init__
+    self.enable_talker()
+  File "/root/miniconda3/envs/qwen/lib/python3.10/site-packages/transformers/models/qwen3_omni_moe/modeling_qwen3_omni_moe.py", line 3812, in enable_talker
+    self.code2wav = Qwen3OmniMoeCode2Wav._from_config(self.config.code2wav_config)
+  File "/root/miniconda3/envs/qwen/lib/python3.10/site-packages/transformers/modeling_utils.py", line 270, in _wrapper
+    return func(*args, **kwargs)
+  File "/root/miniconda3/envs/qwen/lib/python3.10/site-packages/transformers/modeling_utils.py", line 2049, in _from_config
+    model = cls(config, **kwargs)
+  File "/root/miniconda3/envs/qwen/lib/python3.10/site-packages/transformers/models/qwen3_omni_moe/modeling_qwen3_omni_moe.py", line 3740, in __init__
+    self.pre_transformer = Qwen3OmniMoeCode2WavTransformerModel._from_config(config)
+  File "/root/miniconda3/envs/qwen/lib/python3.10/site-packages/transformers/modeling_utils.py", line 270, in _wrapper
+    return func(*args, **kwargs)
+  File "/root/miniconda3/envs/qwen/lib/python3.10/site-packages/transformers/modeling_utils.py", line 2049, in _from_config
+    model = cls(config, **kwargs)
+  File "/root/miniconda3/envs/qwen/lib/python3.10/site-packages/transformers/models/qwen3_omni_moe/modeling_qwen3_omni_moe.py", line 3569, in __init__
+    self.rotary_emb = Qwen3OmniMoeRotaryEmbedding(config=config)
+  File "/root/miniconda3/envs/qwen/lib/python3.10/site-packages/transformers/models/qwen3_omni_moe/modeling_qwen3_omni_moe.py", line 2435, in __init__
+    self.rope_type = self.config.rope_parameters["rope_type"]
+  File "/root/miniconda3/envs/qwen/lib/python3.10/site-packages/transformers/configuration_utils.py", line 198, in __getattribute__
+    return super().__getattribute__(key)
+AttributeError: 'Qwen3OmniMoeCode2WavConfig' object has no attribute 'rope_parameters'
+</code></pre>
+<p>新错误原因是因为当前transformers里面不支持rope_parameters。这个问题我觉得蛮奇怪的，因为我按照官方说法已经升级版本到最新的5.0.0dev版了，直接从源码安装的。实在不清楚为啥，因为transformers已经是最新的了。<br>
+我在github社区里找到了有人跟我一样的错误，根据他们反馈，修复了，但是有人说仍然没修复。<a href="https://github.com/QwenLM/Qwen3-Omni/issues/93#issuecomment-3426749017" data-hovercard-type="issue" data-hovercard-url="/QwenLM/Qwen3-Omni/issues/93/hovercard">这个讨论</a>是围绕这个问题展开的。根据社区反馈，仍然有人遇到问题，没法跑。</p>
+<p>改变思路，先不跑transformers，因为暂时问题不清楚。还是用VLLM部署方式<br>
+根据官方操作按装VLLM，</p>
+<pre class="notranslate"><code class="notranslate">git clone -b qwen3_omni https://github.com/wangxiongts/vllm.git
+cd vllm
+pip install -r requirements/build.txt
+pip install -r requirements/cuda.txt
+export VLLM_PRECOMPILED_WHEEL_LOCATION=https://wheels.vllm.ai/a5dd03c1ebc5e4f56f3c9d3dc0436e9c582c978f/vllm-0.9.2-cp38-abi3-manylinux1_x86_64.whl
+VLLM_USE_PRECOMPILED=1 pip install -e . -v --no-build-isolation
+# If you meet an "Undefined symbol" error while using VLLM_USE_PRECOMPILED=1, please use "pip install -e . -v" to build from source.
+# Install the Transformers
+pip install git+https://github.com/huggingface/transformers
+pip install accelerate
+pip install qwen-omni-utils -U
+pip install -U flash-attn --no-build-isolation
+</code></pre>
+<p>结果报错：</p>
+<pre class="notranslate"><code class="notranslate">Traceback (most recent call last):
+  File "/root/autodl-tmp/vllmTest.py", line 4, in &lt;module&gt;
+    from vllm import LLM, SamplingParams
+ImportError: cannot import name 'LLM' from 'vllm' (unknown location)
+</code></pre>
+<p>问题原因是把VLLm项目和测试文件放在同一个文件夹下，导致python索引扰乱了。解决方案就是先<code class="notranslate">pip uninstall vllm </code>然后在其他地方重新下载安装，这样问题就可以解决了。</p>
+<p>解决完毕后继续执行测试文件，又发生报错：</p>
+<pre class="notranslate"><code class="notranslate">INFO 11-03 15:47:45 [model_runner.py:1671] Graph capturing finished in 2 secs, took 0.11 GiB
+INFO 11-03 15:47:45 [llm_engine.py:428] init engine (profile, create kv cache, warmup model) took 28.44 seconds
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/root/miniconda3/envs/qwen/lib/python3.10/site-packages/audioread/ffdec.py", line 142, in __init__
+[rank0]:     self.proc = popen_multiple(
+[rank0]:   File "/root/miniconda3/envs/qwen/lib/python3.10/site-packages/audioread/ffdec.py", line 92, in popen_multiple
+[rank0]:     return subprocess.Popen(cmd, *args, **kwargs)
+[rank0]:   File "/root/miniconda3/envs/qwen/lib/python3.10/subprocess.py", line 971, in __init__
+[rank0]:     self._execute_child(args, executable, preexec_fn, close_fds,
+[rank0]:   File "/root/miniconda3/envs/qwen/lib/python3.10/subprocess.py", line 1863, in _execute_child
+[rank0]:     raise child_exception_type(errno_num, err_msg, err_filename)
+[rank0]: FileNotFoundError: [Errno 2] No such file or directory: 'avconv'
+
+[rank0]: During handling of the above exception, another exception occurred:
+
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/root/autodl-tmp/testvmml.py", line 47, in &lt;module&gt;
+[rank0]:     audios, images, videos = process_mm_info(messages, use_audio_in_video=True)
+[rank0]:   File "/root/miniconda3/envs/qwen/lib/python3.10/site-packages/qwen_omni_utils/v2_5/__init__.py", line 12, in process_mm_info
+[rank0]:     audios = process_audio_info(conversations, use_audio_in_video)
+[rank0]:   File "/root/miniconda3/envs/qwen/lib/python3.10/site-packages/qwen_omni_utils/v2_5/audio_process.py", line 75, in process_audio_info
+[rank0]:     data = audioread.ffdec.FFmpegAudioFile(path)
+[rank0]:   File "/root/miniconda3/envs/qwen/lib/python3.10/site-packages/audioread/ffdec.py", line 152, in __init__
+[rank0]:     raise NotInstalledError()
+[rank0]: audioread.ffdec.NotInstalledError
+[rank0]:[W1103 15:47:55.564745187 ProcessGroupNCCL.cpp:1476] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+</code></pre>
+<p>这个报错的意思是我服务器里缺少FFmpeg音频处理库，所以我执行<br>
+<code class="notranslate">sudo apt install -y ffmpeg</code></p>
+<p>然后运行终于跑通了！</p>
+<pre class="notranslate"><code class="notranslate">(qwen) root@autodl-container-0a4d4f962f-c0ee9df0:~/autodl-tmp# python testvmml.py 
+INFO 11-03 15:50:29 [__init__.py:244] Automatically detected platform cuda.
+Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'interleaved', 'mrope_interleaved', 'mrope_section'}
+Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'interleaved', 'mrope_section'}
+INFO 11-03 15:50:36 [config.py:841] This model supports multiple tasks: {'classify', 'reward', 'embed', 'generate'}. Defaulting to 'generate'.
+`torch_dtype` is deprecated! Use `dtype` instead!
+INFO 11-03 15:50:36 [config.py:1472] Using max model len 32768
+INFO 11-03 15:50:37 [llm_engine.py:230] Initializing a V0 LLM engine (v0.9.3.dev6+gca66cbff0) with config: model='qwen3-omni-30b-int8', speculative_config=None, tokenizer='qwen3-omni-30b-int8', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, override_neuron_config={}, tokenizer_revision=None, trust_remote_code=True, dtype=torch.bfloat16, max_seq_len=32768, download_dir=None, load_format=auto, tensor_parallel_size=1, pipeline_parallel_size=1, disable_custom_all_reduce=False, quantization=compressed-tensors, enforce_eager=False, kv_cache_dtype=auto,  device_config=cuda, decoding_config=DecodingConfig(backend='auto', disable_fallback=False, disable_any_whitespace=False, disable_additional_properties=False, reasoning_backend=''), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None), seed=1234, served_model_name=qwen3-omni-30b-int8, num_scheduler_steps=1, multi_step_stream_outputs=True, enable_prefix_caching=None, chunked_prefill_enabled=False, use_async_output_proc=True, pooler_config=None, compilation_config={"level":0,"debug_dump_path":"","cache_dir":"","backend":"","custom_ops":[],"splitting_ops":[],"use_inductor":true,"compile_sizes":[],"inductor_compile_config":{"enable_auto_functionalized_v2":false},"inductor_passes":{},"use_cudagraph":false,"cudagraph_num_of_warmups":0,"cudagraph_capture_sizes":[8,4,2,1],"cudagraph_copy_inputs":false,"full_cuda_graph":false,"max_capture_size":8,"local_cache_dir":null}, use_cached_outputs=False, 
+INFO 11-03 15:50:37 [cuda.py:363] Using Flash Attention backend.
+INFO 11-03 15:50:37 [parallel_state.py:1076] rank 0 in world size 1 is assigned as DP rank 0, PP rank 0, TP rank 0, EP rank 0
+INFO 11-03 15:50:37 [model_runner.py:1171] Starting to load model qwen3-omni-30b-int8...
+You are attempting to use Flash Attention 2 without specifying a torch dtype. This might lead to unexpected behaviour
+INFO 11-03 15:50:38 [compressed_tensors_wNa16.py:95] Using MarlinLinearKernel for CompressedTensorsWNA16
+WARNING 11-03 15:50:38 [config.py:440] MoE DP setup unable to determine quantization scheme or unsupported quantization type. This model will not run with DP enabled.
+INFO 11-03 15:50:38 [compressed_tensors_moe.py:82] Using CompressedTensorsWNA16MarlinMoEMethod
+Loading safetensors checkpoint shards:   0% Completed | 0/9 [00:00&lt;?, ?it/s]
+Loading safetensors checkpoint shards:  11% Completed | 1/9 [00:00&lt;00:03,  2.10it/s]
+Loading safetensors checkpoint shards:  22% Completed | 2/9 [00:03&lt;00:15,  2.26s/it]
+Loading safetensors checkpoint shards:  33% Completed | 3/9 [00:07&lt;00:17,  2.93s/it]
+Loading safetensors checkpoint shards:  44% Completed | 4/9 [00:11&lt;00:16,  3.25s/it]
+Loading safetensors checkpoint shards:  56% Completed | 5/9 [00:15&lt;00:13,  3.41s/it]
+Loading safetensors checkpoint shards:  67% Completed | 6/9 [00:18&lt;00:10,  3.42s/it]
+Loading safetensors checkpoint shards:  78% Completed | 7/9 [00:22&lt;00:07,  3.51s/it]
+Loading safetensors checkpoint shards:  89% Completed | 8/9 [00:22&lt;00:02,  2.43s/it]
+Loading safetensors checkpoint shards: 100% Completed | 9/9 [00:24&lt;00:00,  2.31s/it]
+Loading safetensors checkpoint shards: 100% Completed | 9/9 [00:24&lt;00:00,  2.72s/it]
+
+INFO 11-03 15:51:03 [default_loader.py:272] Loading weights took 24.58 seconds
+INFO 11-03 15:51:04 [model_runner.py:1203] Model loading took 33.0590 GiB and 26.101635 seconds
+The image processor of type `Qwen2VLImageProcessor` is now loaded as a fast processor by default, even if the model checkpoint was saved with a slow processor. This is a breaking change and may produce slightly different outputs. To continue using the slow processor, instantiate this class with `use_fast=False`. Note that this behavior will be extended to all models in a future release.
+WARNING 11-03 15:51:07 [model_runner.py:1368] Computed max_num_seqs (min(8, 32768 // 75264)) to be less than 1. Setting it to the minimum value of 1.
+WARNING 11-03 15:51:10 [profiling.py:237] The sequence length used for profiling (max_num_batched_tokens / max_num_seqs = 32768) is too short to hold the multi-modal embeddings in the worst case (40989 tokens in total, out of which {'audio': 1170, 'image': 37632, 'video': 2187} are reserved for multi-modal embeddings). This may cause certain multi-modal inputs to fail during inference, even when the input text is short. To avoid this, you should increase `max_model_len`, reduce `max_num_seqs`, and/or reduce `mm_counts`.
+/root/vllm/vllm/model_executor/layers/rotary_embedding.py:1658: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  torch.tensor([1] * torch.tensor(video_grid_thw).shape[0]))
+WARNING 11-03 15:51:20 [fused_moe.py:690] Using default MoE config. Performance might be sub-optimal! Config file not found at /root/vllm/vllm/model_executor/layers/fused_moe/configs/E=128,N=8192,device_name=NVIDIA_GeForce_RTX_4090.json
+INFO 11-03 15:51:20 [marlin_utils.py:346] You are running Marlin kernel with bf16 on GPUs before SM90. You can consider change to fp16 to achieve better performance if possible.
+INFO 11-03 15:51:26 [worker.py:294] Memory profiling takes 22.16 seconds
+INFO 11-03 15:51:26 [worker.py:294] the current vLLM instance can use total_gpu_memory (47.37GiB) x gpu_memory_utilization (0.95) = 45.00GiB
+INFO 11-03 15:51:26 [worker.py:294] model weights take 33.06GiB; non_torch_memory takes 0.08GiB; PyTorch activation peak memory takes 6.49GiB; the rest of the memory reserved for KV Cache is 5.38GiB.
+INFO 11-03 15:51:27 [executor_base.py:113] # cuda blocks: 3671, # CPU blocks: 2730
+INFO 11-03 15:51:27 [executor_base.py:118] Maximum concurrency for 32768 tokens per request: 1.79x
+INFO 11-03 15:51:29 [model_runner.py:1513] Capturing cudagraphs for decoding. This may lead to unexpected consequences if the model is not static. To run the model in eager mode, set 'enforce_eager=True' or use '--enforce-eager' in the CLI. If out-of-memory error occurs during cudagraph capture, consider decreasing `gpu_memory_utilization` or switching to eager mode. You can also reduce the `max_num_seqs` as needed to decrease memory usage.
+Capturing CUDA graph shapes: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 4/4 [00:01&lt;00:00,  2.07it/s]
+INFO 11-03 15:51:31 [model_runner.py:1671] Graph capturing finished in 2 secs, took 0.11 GiB
+INFO 11-03 15:51:31 [llm_engine.py:428] init engine (profile, create kv cache, warmup model) took 26.60 seconds
+/root/miniconda3/envs/qwen/lib/python3.10/site-packages/librosa/core/audio.py:172: FutureWarning: librosa.core.audio.__audioread_load
+        Deprecated as of librosa version 0.10.0.
+        It will be removed in librosa version 1.0.
+  y, sr_native = __audioread_load(path, offset, duration, dtype)
+qwen-vl-utils using torchvision to read video.
+/root/miniconda3/envs/qwen/lib/python3.10/site-packages/torchvision/io/_video_deprecation_warning.py:5: UserWarning: The video decoding and encoding capabilities of torchvision are deprecated from version 0.22 and will be removed in version 0.24. We recommend that you migrate to TorchCodec, where we'll consolidate the future decoding/encoding capabilities of PyTorch: https://github.com/pytorch/torchcodec
+  warnings.warn(
+
+Adding requests:   0%|                                                                                                                                                                                                                                           | 0/1 [00:00&lt;?, ?it/s]
+Adding requests: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:03&lt;00:00,  3.84s/it]
+Processed prompts:   0%|                                                                                                                                                                                     | 0/1 [00:00&lt;?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]/root/vllm/vllm/model_executor/layers/rotary_embedding.py:1658: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  torch.tensor([1] * torch.tensor(video_grid_thw).shape[0]))
+Processed prompts: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:01&lt;00:00,  1.30s/it, est. speed input: 2732.53 toks/s, output: 66.91 toks/s]
+Of course! Based on the image you provided, here is a detailed description of what is happening:
+
+A person is using a stylus to draw a cartoon-style acoustic guitar on a tablet. The guitar is depicted with a light brown body, a black neck and headstock, and black strings. The person's left hand is holding the tablet steady on a wooden table, while their right hand actively uses the stylus to draw.
+</code></pre></div>
+<div style="font-size:small;margin-top:8px;float:right;"></div>
+
+<button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
+<div class="comments" id="comments"></div>
+
+</div>
+    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://zhangzhao-gg.github.io/CSblog">张钊的代码与旷野</a></div>
+<div id="footer2">
+    <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
+</div>
+
+<script>
+var now=new Date();
+document.getElementById("copyrightYear").innerHTML=now.getFullYear();
+
+if(""!=""){
+    var startSite=new Date("");
+    var diff=now.getTime()-startSite.getTime();
+    var diffDay=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("runday").innerHTML="网站运行"+diffDay+"天"+" • ";
+}
+</script></div>
+</body>
+<script>
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z', 'copy': 'M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z', 'check': 'M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z'};
+var utterancesLoad=0;
+
+let themeSettings={
+    "dark": ["dark","moon","#00f0ff","dark-blue"],
+    "light": ["light","sun","#ff5000","github-light"],
+    "auto": ["auto","sync","","preferred-color-scheme"]
+};
+function changeTheme(mode, icon, color, utheme){
+    document.documentElement.setAttribute("data-color-mode",mode);
+    document.getElementById("themeSwitch").setAttribute("d",value=IconList[icon]);
+    document.getElementById("themeSwitch").parentNode.style.color=color;
+    if(utterancesLoad==1){utterancesTheme(utheme);}
+}
+function modeSwitch(){
+    let currentMode=document.documentElement.getAttribute('data-color-mode');
+    let newMode = currentMode === "light" ? "dark" : currentMode === "dark" ? "auto" : "light";
+    localStorage.setItem("meek_theme", newMode);
+    if(themeSettings[newMode]){
+        changeTheme(...themeSettings[newMode]);
+    }
+}
+function utterancesTheme(theme){
+    const message={type:'set-theme',theme: theme};
+    const iframe=document.getElementsByClassName('utterances-frame')[0];
+    iframe.contentWindow.postMessage(message,'https://utteranc.es');
+}
+if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
+console.log("\n %c Gmeek last https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
+</script>
+
+<script>
+document.getElementById("pathHome").setAttribute("d",IconList["home"]);
+document.getElementById("pathIssue").setAttribute("d",IconList["github"]);
+
+
+
+function openComments(){
+    cm=document.getElementById("comments");
+    cmButton=document.getElementById("cmButton");
+    cmButton.innerHTML="loading";
+    span=document.createElement("span");
+    span.setAttribute("class","AnimatedEllipsis");
+    cmButton.appendChild(span);
+
+    script=document.createElement("script");
+    script.setAttribute("src","https://utteranc.es/client.js");
+    script.setAttribute("repo","zhangzhao-gg/CSblog");
+    script.setAttribute("issue-term","title");
+    
+    if(localStorage.getItem("meek_theme")=="dark"){script.setAttribute("theme","dark-blue");}
+    else if(localStorage.getItem("meek_theme")=="light") {script.setAttribute("theme","github-light");}
+    else{script.setAttribute("theme","preferred-color-scheme");}
+    
+    script.setAttribute("crossorigin","anonymous");
+    script.setAttribute("async","");
+    cm.appendChild(script);
+
+    int=self.setInterval("iFrameLoading()",200);
+}
+
+function iFrameLoading(){
+    var utterances=document.getElementsByClassName('utterances');
+    if(utterances.length==1){
+        if(utterances[0].style.height!=""){
+            utterancesLoad=1;
+            int=window.clearInterval(int);
+            document.getElementById("cmButton").style.display="none";
+            console.log("utterances Load OK");
+        }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const createClipboardHTML = (codeContent, additionalClasses = '') => `
+        <pre class="notranslate"><code class="notranslate">${codeContent}</code></pre>
+        <div class="clipboard-container position-absolute right-0 top-0 ${additionalClasses}">
+            <clipboard-copy class="ClipboardButton btn m-2 p-0" role="button" style="display: inherit;">
+                <svg height="16" width="16" class="octicon octicon-copy m-2"><path d="${IconList["copy"]}"></path></svg>
+                <svg height="16" width="16" class="octicon octicon-check color-fg-success m-2 d-none"><path d="${IconList["check"]}"></path></svg>
+            </clipboard-copy>
+            <div class="copy-feedback">Copied!</div>
+        </div>
+    `;
+
+    const handleCodeElements = (selector = '') => {
+        document.querySelectorAll(selector).forEach(codeElement => {
+            const codeContent = codeElement.innerHTML;
+            const newStructure = document.createElement('div');
+            newStructure.className = 'snippet-clipboard-content position-relative overflow-auto';
+            newStructure.innerHTML = createClipboardHTML(codeContent);
+
+            const parentElement = codeElement.parentElement;
+            if (selector.includes('highlight')) {
+                parentElement.insertBefore(newStructure, codeElement.nextSibling);
+                parentElement.removeChild(codeElement);
+            } else {
+                parentElement.parentElement.replaceChild(newStructure, parentElement);
+            }
+        });
+    };
+
+    handleCodeElements('pre.notranslate > code.notranslate');
+    handleCodeElements('div.highlight > pre.notranslate');
+
+    let currentFeedback = null;
+    document.querySelectorAll('clipboard-copy').forEach(copyButton => {
+        copyButton.addEventListener('click', () => {
+            const codeContent = copyButton.closest('.snippet-clipboard-content').innerText;
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = codeContent;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempTextArea);
+
+            const copyIcon = copyButton.querySelector('.octicon-copy');
+            const checkIcon = copyButton.querySelector('.octicon-check');
+            const copyFeedback = copyButton.nextElementSibling;
+
+            if (currentFeedback && currentFeedback !== copyFeedback) {currentFeedback.style.display = 'none';}
+            currentFeedback = copyFeedback;
+
+            copyIcon.classList.add('d-none');
+            checkIcon.classList.remove('d-none');
+            copyFeedback.style.display = 'block';
+            copyButton.style.borderColor = 'var(--color-success-fg)';
+
+            setTimeout(() => {
+                copyIcon.classList.remove('d-none');
+                checkIcon.classList.add('d-none');
+                copyFeedback.style.display = 'none';
+                copyButton.style.borderColor = '';
+            }, 2000);
+        });
+    });
+});
+
+</script>
+
+
+</html>
