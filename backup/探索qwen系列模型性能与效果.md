@@ -9,4 +9,6 @@
 未完待续
 
 3. QuantTrio/Qwen3-Coder-30B-A3B-Instruct-GPTQ-Int8
-未完待续
+显存占用 45G，在45G基础上的上下文为32k
+首包250ms-500ms 字符推理速度是没量化的1.3倍
+推理能力和未量化过的半斤八两
