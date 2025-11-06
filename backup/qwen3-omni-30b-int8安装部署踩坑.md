@@ -88,6 +88,8 @@ AttributeError: 'Qwen3OmniMoeCode2WavConfig' object has no attribute 'rope_param
 新错误原因是因为当前transformers里面不支持rope_parameters。这个问题我觉得蛮奇怪的，因为我按照官方说法已经升级版本到最新的5.0.0dev版了，直接从源码安装的。实在不清楚为啥，因为transformers已经是最新的了。
 我在github社区里找到了有人跟我一样的错误，根据他们反馈，修复了，但是有人说仍然没修复。[这个讨论](https://github.com/QwenLM/Qwen3-Omni/issues/93#issuecomment-3426749017)是围绕这个问题展开的。根据社区反馈，仍然有人遇到问题，没法跑。
 
+11.6更新，这个错误有人有方案了，[链接](https://github.com/QwenLM/Qwen3-Omni/issues/116#issuecomment-3483504269)
+
 改变思路，先不跑transformers，因为暂时问题不清楚。还是用VLLM部署方式
 根据官方操作按装VLLM，
 ```
