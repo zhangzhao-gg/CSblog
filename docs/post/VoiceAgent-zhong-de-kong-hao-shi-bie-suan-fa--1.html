@@ -10,13 +10,13 @@
         let theme = localStorage.getItem("meek_theme") || "light";
         document.documentElement.setAttribute("data-color-mode", theme);
     </script>
-<meta name="description" content="你好，我是张钊，一个技术马马虎虎，想做点有意思的产品的程序员。">
-<meta property="og:title" content="你好👋，欢迎来到我的博客世界">
-<meta property="og:description" content="你好，我是张钊，一个技术马马虎虎，想做点有意思的产品的程序员。">
+<meta name="description" content="先讲思路：用silero-vad人声检测模型来检测音频信号，把所有人声音频聚合起来，提取特征，转换为向量，然后与faiss存储的音频库进行匹配。">
+<meta property="og:title" content="VoiceAgent中的空号识别算法-1">
+<meta property="og:description" content="先讲思路：用silero-vad人声检测模型来检测音频信号，把所有人声音频聚合起来，提取特征，转换为向量，然后与faiss存储的音频库进行匹配。">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://zhangzhao-gg.github.io/CSblog/post/ni-hao-%F0%9F%91%8B%EF%BC%8C-huan-ying-lai-dao-wo-de-bo-ke-shi-jie.html">
+<meta property="og:url" content="https://zhangzhao-gg.github.io/CSblog/post/VoiceAgent-zhong-de-kong-hao-shi-bie-suan-fa--1.html">
 <meta property="og:image" content="https://zz-1306813397.cos.ap-guangzhou.myqcloud.com/%E5%BC%A0%E9%92%8A.jpg">
-<title>你好👋，欢迎来到我的博客世界</title>
+<title>VoiceAgent中的空号识别算法-1</title>
 
 
 
@@ -49,7 +49,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 
 <body>
     <div id="header">
-<h1 class="postTitle">你好👋，欢迎来到我的博客世界</h1>
+<h1 class="postTitle">VoiceAgent中的空号识别算法-1</h1>
 <div class="title-right">
     <a href="https://zhangzhao-gg.github.io/CSblog" id="buttonHome" class="btn btn-invisible circle" title="首页">
         <svg class="octicon" width="16" height="16">
@@ -57,7 +57,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
         </svg>
     </a>
     
-    <a href="https://github.com/zhangzhao-gg/CSblog/issues/1" target="_blank" class="btn btn-invisible circle" title="Issue">
+    <a href="https://github.com/zhangzhao-gg/CSblog/issues/16" target="_blank" class="btn btn-invisible circle" title="Issue">
         <svg class="octicon" width="16" height="16">
             <path id="pathIssue" fill-rule="evenodd"></path>
         </svg>
@@ -73,22 +73,8 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 </div>
 </div>
     <div id="content">
-<div class="markdown-body" id="postBody"><p>你好，我是张钊，一个技术马马虎虎，想做点有意思的产品的程序员。</p>
-<p>目前正在南京工业大学攻读硕士学位，预计2026年毕业。平时喜欢钻进项目、比赛，最近对产品开始感兴趣了，计划构思制作一些个人产品，对这个世界产生一些影响。</p>
-<p>除了学生身份，我曾经在区块链领域是一个创业者，在2023年，我带着4人小团队全栈开发（我与三名学弟学妹），我们在很短的时间内完成了一个产品的设计到研发上线流程，<strong>上线后当天用户破万，首周积累数万用户、达成十多万流水。</strong> 这是一段很有意思的经历，是我首次将自己的技术赋能实际业务产品并且商业化。这个项目虽然没有给我赚到特别多的钱，但是引发我非常多的思考。</p>
-<p>在这个项目结束之后，我还尝试进行过几次市场化尝试，但是都失败了，失败各具特色，今后慢慢写复盘博客分享出来。</p>
-<p>💻目前，我在南京一家VoiceAgent公司实习，深度参与高并发语音系统的优化与重构，持续积累实战经验。<br>
-其他方面：发表过SCI论文、申请过专利，拿过多个国家级竞赛奖项。</p>
-<p>我的技能不止于代码：<br>
-✅ 韧性 · 问题解决 · 冷静应对高压<br>
-✅ 任务调度与多线推进<br>
-✅ 系统思维 x 快速学习</p>
-<p>同时，我也是：<br>
-🎨 3D艺术设计爱好者<br>
-🫂 心理咨询师（认证进修中）<br>
-📖 资深书虫 &amp; 绘画手绘玩家（未来会，暂时不会）</p>
-<p>我相信：人生是旷野，不是轨道。我愿意持续探索、真诚分享，和更多同频的人一起成长。</p>
-<p>如果你对技术、AI、创业、运动，甚至书籍、心理、艺术感兴趣，都很欢迎来我的博客逛逛～期待与你交流！✨</p></div>
+<div class="markdown-body" id="postBody"><p>先讲思路：用silero-vad人声检测模型来检测音频信号，把所有人声音频聚合起来，提取特征，转换为向量，然后与faiss存储的音频库进行匹配。找到Top-k的音频。<br>
+未完待续</p></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
