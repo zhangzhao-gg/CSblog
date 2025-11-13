@@ -10,9 +10,9 @@
         let theme = localStorage.getItem("meek_theme") || "light";
         document.documentElement.setAttribute("data-color-mode", theme);
     </script>
-<meta name="description" content="先讲思路：用silero-vad人声检测模型来检测音频信号，把所有人声音频聚合起来，提取特征，转换为向量，然后与faiss存储的音频库进行匹配。">
+<meta name="description" content="先讲思路：用silero-vad人声检测模型来检测音频信号，把所有人声音频聚合起来，提取特征，转换为向量，然后与faiss存储的音频库进行检索。">
 <meta property="og:title" content="VoiceAgent中的空号识别算法-1">
-<meta property="og:description" content="先讲思路：用silero-vad人声检测模型来检测音频信号，把所有人声音频聚合起来，提取特征，转换为向量，然后与faiss存储的音频库进行匹配。">
+<meta property="og:description" content="先讲思路：用silero-vad人声检测模型来检测音频信号，把所有人声音频聚合起来，提取特征，转换为向量，然后与faiss存储的音频库进行检索。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://zhangzhao-gg.github.io/CSblog/post/VoiceAgent-zhong-de-kong-hao-shi-bie-suan-fa--1.html">
 <meta property="og:image" content="https://zz-1306813397.cos.ap-guangzhou.myqcloud.com/%E5%BC%A0%E9%92%8A.jpg">
@@ -73,8 +73,10 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 </div>
 </div>
     <div id="content">
-<div class="markdown-body" id="postBody"><p>先讲思路：用silero-vad人声检测模型来检测音频信号，把所有人声音频聚合起来，提取特征，转换为向量，然后与faiss存储的音频库进行匹配。找到Top-k的音频。<br>
-未完待续</p></div>
+<div class="markdown-body" id="postBody"><p>先讲思路：用silero-vad人声检测模型来检测音频信号，把所有人声音频聚合起来，提取特征，转换为向量，然后与faiss存储的音频库进行检索。</p>
+<p>silero-vad找到人声开头<br>
+之后通过RMS音频功率计算找到音频衰弱的部分，衰弱就是结束说话的部分<br>
+有说话开头和说话结束后，进行特征提取并向量化然后进行检索。拿到这个音频的标签。结束连接</p></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
